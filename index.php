@@ -7,6 +7,7 @@ session_start();
       <?php
          include 'bootstrapCSS.php';
       ?>
+      <link rel=“stylesheet” type=“text/css” href=“navbarCSS.css” />
 
       <title>Home</title>
     </head>

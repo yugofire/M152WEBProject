@@ -22,7 +22,7 @@ if (isset($_FILES['img'])) {
         ?>
         <form action="index.php" method="post" enctype="multipart/form-data">
             <textarea name="comment" rows="8" cols="50" placeholder="Ajouter un commentaire ici..."></textarea>
-            <p><input type="file" name="img" multiple></p>
+            <p><input type="file" name="img" multiple accept="image/*"></p>
             <p><input type="submit" value="OK"></p>
         </form>
     </body>
