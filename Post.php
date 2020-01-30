@@ -20,10 +20,12 @@ if (isset($_FILES['img'])) {
         <?php
         include 'navbar.php';
         ?>
-        <form action="index.php" method="post" enctype="multipart/form-data">
-            <textarea name="comment" rows="8" cols="50" placeholder="Ajouter un commentaire ici..."></textarea>
-            <p><input type="file" name="img" multiple accept="image/*"></p>
-            <p><input type="submit" value="OK"></p>
-        </form>
+        <div style="margin-top: 100px;">
+            <form class="text-center" action="index.php" method="post" enctype="multipart/form-data">
+                <textarea name="comment" rows="8" cols="50" placeholder="Ajouter un commentaire ici..."></textarea>
+                <p><input type="file" name="img" multiple accept="image/*"></p>
+                <p><input type="submit" class="btn btn-primary mb-2" value="Envoyer"></p>
+            </form> 
+        </div>
     </body>
 </html>
