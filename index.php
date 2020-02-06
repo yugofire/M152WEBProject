@@ -16,7 +16,7 @@ session_start();
         include 'navbar.php';
         ?>
         <h1> BIENVENUE </h1>
-        <img src="https://i.pinimg.com/236x/8e/26/fd/8e26fd1416c14a97ca3afb2e6e6d7c14.jpg" style="width: 64px; height: 64px;">
+        <img src="img/76896941-p0-master1200.jpg" style="height: 100px;">
 
       <!-- Optional JavaScript -->
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->

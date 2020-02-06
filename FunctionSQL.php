@@ -2,11 +2,20 @@
 
 include 'connection.php';
 
-function send(){
+function sendMedia($typeMedia, $nomMedia, $CreationDate, $modificationDate){
     $db = dbConnection();
 
-    $request = $db->prepare("INSERT INTO player (email, pseudo, age, country) VALUES (?, ?, ?, ?)");
-    $request->execute([$email, $pseudo, $age, $country]);
+    $request = $db->prepare("INSERT INTO media (typeMedia , nomMedia, creationDate, modificationDate) VALUES (? , ?, ?, ?)");
+    $request->execute([$typeMedia, $nomMedia, $CreationDate, $modificationDate]);
+    $request = null;
+
+}
+
+function sendComment( $commentaire, $CreationDate, $modificationDate){
+    $db = dbConnection();
+
+    $request = $db->prepare("INSERT INTO post (commentaire , creationDate, modificationDate) VALUES (?, ?, ?)");
+    $request->execute([$commentaire, $CreationDate, $modificationDate]);
     $request = null;
 
 }
