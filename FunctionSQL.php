@@ -20,4 +20,13 @@ function sendComment( $commentaire, $CreationDate, $modificationDate){
 
 }
 
+function showMedia(){
+
+    $db = dbConnection();
+    $result = $db->query("SELECT nomMedia FROM media")->fetch(); 
+
+    return $result;
+
+}
+
 ?>

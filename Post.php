@@ -17,6 +17,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             foreach($_FILES['img']['name'] as $key=>$val){
     
                 $allowed = array('png', 'jpg');
+                $uniquesavename= time().uniqid(rand());
                 $filename = $uniquesavename . $_FILES['img']['name'][$key];
                 $ext = pathinfo($filename, PATHINFO_EXTENSION);
                 if (in_array($ext, $allowed)) {
@@ -24,7 +25,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                         echo 'Fichier trop volumineux';
                     }
                     else{
-                        $uniquesavename= time().uniqid(rand());
                         $uploads_dir = './img';
                         
                         move_uploaded_file($_FILES['img']['tmp_name'][$key], "$uploads_dir/$filename");

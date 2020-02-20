@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+include 'FunctionSQL.php';
+
+$media = showMedia();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,7 +21,17 @@ session_start();
         include 'navbar.php';
         ?>
         <h1> BIENVENUE </h1>
-        <img src="img/76896941-p0-master1200.jpg" style="height: 100px;">
+        <div style= "float: right;">
+        <?php 
+          for ($i=0; $i < count($media); $i++) {
+            ?>
+            <img src="img/<?php echo $media[$i] ;?>" style="height: 300px;">
+            <?php 
+          }
+        
+        ?>
+        </div>
+        <img src="img/TamagotchiHeureux.png" style="height: 100px;">
 
       <!-- Optional JavaScript -->
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
