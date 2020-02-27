@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include 'FunctionSQL.php';
+include './FunctionSQL.php';
 
 $media = showMedia();
 
@@ -9,30 +9,25 @@ $media = showMedia();
 <!DOCTYPE html>
 <html>
     <head>
-      <?php
-         include 'bootstrapCSS.php';
-      ?>
-      
+      <?php include './bootstrapCSS.php';?>
 
       <title>Home</title>
     </head>
     <body>
-        <?php
-        include 'navbar.php';
-        ?>
+        <?php include './navbar.php'; ?>
         <h1> BIENVENUE </h1>
-        <div style= "float: right;">
+        
         <?php 
+        if((isset($media) ? $media : "") != "")
           for ($i=0; $i < count($media); $i++) {
             ?>
-            <img src="img/<?php echo $media[$i] ;?>" style="height: 300px;">
+            <div style= "float: right; position: relative;">
+            <img src="img/<?= $media[$i][0] ?>" style="height: 300px;"/>
+            </div>
             <?php 
           }
-        
         ?>
-        </div>
-        <img src="img/TamagotchiHeureux.png" style="height: 100px;">
-
+        
       <!-- Optional JavaScript -->
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

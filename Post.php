@@ -18,8 +18,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     
                 $allowed = array('png', 'jpg');
                 $uniquesavename= time().uniqid(rand());
-                $filename = $uniquesavename . $_FILES['img']['name'][$key];
-                $ext = pathinfo($filename, PATHINFO_EXTENSION);
+                $ext = pathinfo($_FILES['img']['name'][$key], PATHINFO_EXTENSION);
+                $filename = $uniquesavename .'.'. $ext;
+
                 if (in_array($ext, $allowed)) {
                     if ($_FILES['img']['size'][$key] > 3000000) {
                         echo 'Fichier trop volumineux';
@@ -29,7 +30,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                         
                         move_uploaded_file($_FILES['img']['tmp_name'][$key], "$uploads_dir/$filename");
                     
-                        sendMedia($_FILES['img']['type'][$key], $_FILES['img']['name'][$key], $date, $date);
+                        sendMedia($_FILES['img']['type'][$key], $filename, $date, $date);
                         session_destroy();
                         header('Location: index.php');
                     }   
