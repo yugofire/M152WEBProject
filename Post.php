@@ -8,9 +8,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if (isset($_POST['comment'])){
 
         $comment = $_POST['comment'];
-
-        sendComment($comment, $date, $date);
         
+    }
+    else{
+
+        $comment = "";
+
     }
     if (isset($_FILES['img']['name'])) {
         if(!empty(array_filter($_FILES['img']['name']))){
@@ -28,9 +31,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                     else{
                         $uploads_dir = './img';
                         
-                        move_uploaded_file($_FILES['img']['tmp_name'][$key], "$uploads_dir/$filename");
-                    
-                        sendMedia($_FILES['img']['type'][$key], $filename, $date, $date);
+                        if (move_uploaded_file($_FILES['img']['tmp_name'][$key], "$uploads_dir/$filename")) {
+                            sendMedia($_FILES['img']['type'][$key], $filename, $date, $date, $comment);
+                        }
+
                         session_destroy();
                         header('Location: index.php');
                     }   

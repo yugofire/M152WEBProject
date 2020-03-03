@@ -2,12 +2,17 @@
 
 include 'connection.php';
 
-function sendMedia($typeMedia, $nomMedia, $CreationDate, $modificationDate){
+function sendMedia($typeMedia, $nomMedia, $CreationDate, $modificationDate, $commentaire){
     $db = dbConnection();
+    $db->beginTransaction();
 
     $request = $db->prepare("INSERT INTO media (typeMedia , nomMedia, creationDate, modificationDate) VALUES (? , ?, ?, ?)");
     $request->execute([$typeMedia, $nomMedia, $CreationDate, $modificationDate]);
-    $request = null;
+
+    $request = $db->prepare("INSERT INTO post (commentaire , creationDate, modificationDate) VALUES (?, ?, ?)");
+    $request->execute([$commentaire, $CreationDate, $modificationDate]);
+
+    $db->commit();
 
 }
 
