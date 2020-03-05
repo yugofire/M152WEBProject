@@ -15,28 +15,34 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $comment = "";
 
     }
-    if (isset($_FILES['img']['name'])) {
-        if(!empty(array_filter($_FILES['img']['name']))){
-            foreach($_FILES['img']['name'] as $key=>$val){
+    if (isset($_FILES['media']['name'])) {
+        if(!empty(array_filter($_FILES['media']['name']))){
+            foreach($_FILES['media']['name'] as $key=>$val){
     
-                $allowed = array('png', 'jpg');
+                $allowed = array('png', 'jpg', 'gif', 'mp4', 'mp3');
                 $uniquesavename= time().uniqid(rand());
-                $ext = pathinfo($_FILES['img']['name'][$key], PATHINFO_EXTENSION);
+                $ext = pathinfo($_FILES['media']['name'][$key], PATHINFO_EXTENSION);
                 $filename = $uniquesavename .'.'. $ext;
 
                 if (in_array($ext, $allowed)) {
-                    if ($_FILES['img']['size'][$key] > 3000000) {
+                    if ($_FILES['media']['size'][$key] > 30000000) {
                         echo 'Fichier trop volumineux';
                     }
                     else{
-                        $uploads_dir = './img';
                         
-                        if (move_uploaded_file($_FILES['img']['tmp_name'][$key], "$uploads_dir/$filename")) {
-                            sendMedia($_FILES['img']['type'][$key], $filename, $date, $date, $comment);
-                        }
+                        if (move_uploaded_file($_FILES['media']['tmp_name'][$key], "./media/" . $filename)) {
+                            sendMedia($_FILES['media']['type'][$key], $filename, $date, $date, $comment);
 
-                        session_destroy();
+                            
                         header('Location: index.php');
+                        }
+                        else{
+
+                            echo "Erreur lors de l'upload du fichier";
+
+                        }
+                        session_destroy();
+                        
                     }   
                 }
                 else{
@@ -68,7 +74,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         <div style="margin-top: 100px;">
             <form class="text-center" action="#" method="post" enctype="multipart/form-data">
                 <textarea name="comment" rows="8" cols="50" placeholder="Ajouter un commentaire ici..."></textarea>
-                <p><input type="file" name="img[]" multiple accept="image/*"></p>
+                <p><input type="file" name="media[]" multiple accept="image/*,video/*,audio/*"></p>
                 <p><input type="submit" class="btn btn-primary mb-2" value="Envoyer"></p>
             </form> 
         </div>
